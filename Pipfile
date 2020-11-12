@@ -9,6 +9,9 @@ pylint = "*"
 
 [packages]
 django = "===3.0.7"
+djangorestframework = "*"
+django-filter = "*"
+django-cors-headers = "*"
 
 [requires]
 python_version = "3.8"
