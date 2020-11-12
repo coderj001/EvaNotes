@@ -1,4 +1,6 @@
 from django.db import models
+from django.utils.timesince import timesince
+
 
 # Create your models here.
 
@@ -15,3 +17,7 @@ class Note(models.Model):
 
     def __str__(self):
         return self.title
+
+    @property
+    def updated_since(self):
+        return f"{timesince(self.updated_at)}"
