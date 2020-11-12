@@ -94,7 +94,7 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-ASGI_APPLICATION = "note_project.routing.application"  # websocket
+ASGI_APPLICATION = "note_project.asgi.application"  # websocket
 
 CHANNEL_LAYER = {
     'default': {
