@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 
-import { Button, Container, Row, Col } from "react-bootstrap";
+import { Navbar, Button, Container, Row, Col } from "react-bootstrap";
 
 import ListNotes from "./components/ListNotes";
 import AddNotes from "./components/AddNote";
@@ -20,6 +20,7 @@ class App extends Component {
     this.handleItemClick = this.handleItemClick.bind(this);
     this.handleAddNote = this.handleAddNote.bind(this);
     this.getData = this.getData.bind(this);
+    this.handleSaveNote = this.handleSaveNote.bind(this);
   }
 
   componentDidMount() {
@@ -52,12 +53,15 @@ class App extends Component {
     return (
       <React.Fragment>
         <Container>
+          <Navbar expand="lg" variant="light" bg="light">
+            <Navbar.Brand href="#">EvaNotes</Navbar.Brand>
+          </Navbar>
           <Row>
             <Col xs="10">
               <h1>RealTime Notes</h1>
             </Col>
             <Col xs="2">
-              <Button varient="primary" onClick={this.handleAddNote}>
+              <Button variant="primary" onClick={this.handleAddNote}>
                 Create a new notes
               </Button>
             </Col>

@@ -9,6 +9,7 @@ class AddNotes extends Component {
       title: "",
       content: "",
     };
+    this.handleChange = this.handleChange.bind(this);
   }
 
   handleSubmit = (e) => {
@@ -58,7 +59,7 @@ class AddNotes extends Component {
             </Form.Text>
           </Form.Group>
 
-          <Button varient="outline-success" size="lg">
+          <Button variant="outline-success" size="lg" type="submit">
             Save
           </Button>
         </Form>
