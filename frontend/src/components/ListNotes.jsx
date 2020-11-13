@@ -1,4 +1,5 @@
 import React from "react";
+import Note from "./Note";
 
 import { ListGroup, ListGroupItem } from "react-bootstrap";
 
@@ -7,7 +8,7 @@ export default function ListNotes(props) {
   let notes_list = notes.map((note) => {
     return (
       <ListGroupItem key={note.id} onClick={() => handleItemClick(note.id)}>
-        <p>{note.title}</p>
+        <Note title={note.title}></Note>
       </ListGroupItem>
     );
   });

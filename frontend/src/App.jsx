@@ -1,8 +1,11 @@
 import React, { Component } from "react";
-import { Button, Container, Row, Col } from "react-bootstrap";
-import ListNotes from "./components/ListNotes";
 
-import { fetchNotes, fetchNote, updateNote } from "./api";
+import { Button, Container, Row, Col } from "react-bootstrap";
+
+import ListNotes from "./components/ListNotes";
+import AddNotes from "./components/AddNote";
+
+import { fetchNotes, fetchNote, updateNote, addNote } from "./api";
 
 class App extends Component {
   constructor(props) {
@@ -39,6 +42,12 @@ class App extends Component {
       return { is_creating: true };
     });
   }
+
+  async handleSaveNote(data) {
+    await addNote(data);
+    await this.getData();
+  }
+
   render() {
     return (
       <React.Fragment>
@@ -48,7 +57,7 @@ class App extends Component {
               <h1>RealTime Notes</h1>
             </Col>
             <Col xs="2">
-              <Button varients="primary" onClick={this.handleAddNote}>
+              <Button varient="primary" onClick={this.handleAddNote}>
                 Create a new notes
               </Button>
             </Col>
@@ -62,9 +71,11 @@ class App extends Component {
             </Col>
             <Col xs="8">
               <p>Content/Editing here...</p>
-              {this.state.is_creating
-                ? "Creating Now..."
-                : `Editing Note with id: ${this.state.current_note_id}`}
+              {this.state.is_creating ? (
+                <AddNotes handleSaveNote={this.handleSaveNote} />
+              ) : (
+                `Editing Note with id: ${this.state.current_note_id}`
+              )}
             </Col>
           </Row>
         </Container>
