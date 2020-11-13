@@ -37,9 +37,11 @@ class App extends Component {
     this.setState({ notes: data });
   }
 
-  handleItemClick(id) {
+  async handleItemClick(id) {
+    let selected_note = await fetchNote(id);
+
     this.setState((prevState) => {
-      return { is_creating: false, current_note_id: id };
+      return { is_creating: false, current_note_id: id, note: selected_note };
     });
   }
 
@@ -69,7 +71,7 @@ class App extends Component {
     this.setState({
       note: current_note,
     });
-    const socket = this.refs.socket;
+    const socket = this.ref.socket;
     socket.state.ws.send(JSON.stringify(current_note));
   }
 
@@ -108,6 +110,7 @@ class App extends Component {
                 />
               )}
               <Websocket
+                ref="socket"
                 url="ws://localhost:8000/ws/notes"
                 onMessage={this.handleData.bind(this)}
               />
