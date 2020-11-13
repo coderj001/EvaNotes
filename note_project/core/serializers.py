@@ -5,4 +5,4 @@ from core.models import Note
 class NoteSerializer(serializers.ModelSerializer):
     class Meta:
         model = Note
-        fields = ('title', 'content', 'updated_since')
+        fields = ('id', 'title', 'content', 'updated_since')

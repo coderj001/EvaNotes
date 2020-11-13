@@ -2,27 +2,40 @@ import React, { Component } from "react";
 import { Button, Container, Row, Col } from "react-bootstrap";
 import ListNotes from "./components/ListNotes";
 
+import { fetchNotes, fetchNote, updateNote } from "./api";
+
 class App extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      notes: notes_temp,
+      notes: [],
       current_note_id: 0,
       is_creating: true,
+      is_featching: true,
     };
     this.handleItemClick = this.handleItemClick.bind(this);
     this.handleAddNote = this.handleAddNote.bind(this);
+    this.getData = this.getData.bind(this);
+  }
+
+  componentDidMount() {
+    this.getData();
+  }
+
+  async getData() {
+    const data = await fetchNotes();
+    this.setState({ notes: data });
   }
 
   handleItemClick(id) {
-    this.setState((preState) => {
+    this.setState((prevState) => {
       return { is_creating: false, current_note_id: id };
     });
   }
 
   handleAddNote() {
-    this.setState((preState) => {
+    this.setState((prevState) => {
       return { is_creating: true };
     });
   }
@@ -61,21 +74,3 @@ class App extends Component {
 }
 
 export default App;
-
-var notes_temp = [
-  {
-    id: 1,
-    title: "This is react notes 1",
-    content: "This is react notes content 1",
-  },
-  {
-    id: 2,
-    title: "This is react notes 2",
-    content: "This is react notes content 2",
-  },
-  {
-    id: 3,
-    title: "This is react notes 3",
-    content: "This is react notes content 3",
-  },
-];
